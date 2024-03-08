@@ -74,8 +74,8 @@ function makePayWithMPESA() {
     AlipayJSBridge.call(
       'payWithMpesa',
       {
-        businessID: '1112223',
-        billReference: '123456789',  // optional field
+        businessID: '6060',
+        billReference: 'Test Payment',  // optional field
         amount: '30.0',
         currency: 'ETB', // currencyCode to be used - only ETB supported
         reason: 'Buy Electronics', // optional field
