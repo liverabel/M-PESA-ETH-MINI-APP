@@ -123,21 +123,21 @@ function singleSignOn() {
       this.setData({
         permissions: res,
       });
-      my.hideLoading();
-      my.alert({
+      AlipayJSBridge.call('hideLoading');
+      AlipayJSBridge.call('alert', {
         title: "Login Successful",
         content: "You have successfully logged in.",
         buttonText: "okay",
       });
     },
     fail: (error) => {
-      my.hideLoading();
+      AlipayJSBridge.call('hideLoading');
       console.log("ERROR", error);
-      my.alert({
+      AlipayJSBridge.call('alert', {
         title: "Error",
         content: JSON.stringify(error, null, 2),
         buttonText: "okay",
       });
     }
-  }); // <-- Add closing parenthesis here
+  });
 }
