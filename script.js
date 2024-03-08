@@ -39,10 +39,6 @@ function snapshot() {
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 }
 
-function openWebPage() {
-  window.open('https://youtube.com', '_blank');
-}
-
 function getDocument() {
   console.log('trying to get mini app document');
   try {
@@ -73,20 +69,20 @@ function getDocument() {
 
 // AlipayJSBridge.call('jsAPI', {}, ()=> {}, () =>{})
 
-function makePayBillPayment() {
+function makePayWithMPESA() {
   try {
     AlipayJSBridge.call(
-      'payBill',
+      'payWithMpesa',
       {
         businessID: '1112223',
-        billReference: '123456789',
+        billReference: '123456789',  // optional field
         amount: '30.0',
-        currency: 'KES', // currencyCode to be used - only KES supported for now
-        reason: 'Electricity bill', // optional field
+        currency: 'ETB', // currencyCode to be used - only ETB supported
+        reason: 'Buy Electronics', // optional field
       },
       (res) => {
         console.log('success', res);
-        alert(`paybill, ${JSON.stringify(res)}`);
+        alert(`payWithMpesa, ${JSON.stringify(res)}`);
         // AlipayJSBridge.call
         //   'alert',{ title: 'Success', content: JSON.stringify(res) },
         //   () => {},
@@ -111,64 +107,37 @@ function makePayBillPayment() {
   }
 }
 
-function makeTillPayment() {
-  alert(`paybill,`);
-  try {
-    AlipayJSBridge.call(
-      'buyGoods',
-      {
-        tillNumber: '89900',
-        amount: '25.0',
-        currency: 'KES', // currencyCode to be used - only KES supported for now
-        reason: 'Jon Groceries', // optional field
-      },
-      (res) => {
-        alert(`BuyGoods ${JSON.stringify(res)}`);
-        // AlipayJSBridge.alert({
-        //   content: JSON.stringify(res),
-        // });
-      },
-      (res) => {
-        alert(res);
-        AlipayJSBridge.call(
-          'alert',
-          {
-            title: 'Fail',
-            content: JSON.stringify(res),
-          },
-          () => {},
-          () => {}
-        );
-      }
-    );
-  } catch (error) {
-    console.log('error', error);
-    alert(error);
-  }
+function singleSignOn() {
+  AlipayJSBridge.call("userScopes", {
+    scopes: [
+      "USER_NAME",
+      "USER_LNAME",
+      "USER_MNAME",
+      "USER_DOB",
+      "USER_ID",
+      "USER_IDNO",
+      "USER_MOBILE",
+    ],
+    success: (res) => {
+      console.log("RES", res);
+      this.setData({
+        permissions: res,
+      });
+      my.hideLoading();
+      my.alert({
+        title: "user scopes",
+        content: JSON.stringify(res, null, 2),
+        buttonText: "okay",
+      });
+    },
+    fail: (error) => {
+      my.hideLoading();
+      console.log("ERROR", error);
+      my.alert({
+        title: "Error",
+        content: JSON.stringify(error, null, 2),
+        buttonText: "okay",
+      });
+    }
+  }); // <-- Add closing parenthesis here
 }
-
-function openDomainUsingWindow() {
-  window.open('https://www.youtube.com/', '_blank');
-}
-
-function myOpenURL() {
-  const url = encodeURIComponent('https://youtube.com');
-  console.log('url being passed', url);
-  my.navigateTo({ url: `/pages/domainb/domainb?url=${url}` });
-}
-
-function openDomainUsingAlipayJSBridge() {
-  try {
-    AlipayJSBridge.call('pushWindow', {
-      url: 'https://www.youtube.com/',
-      param: { closeCurrentWindow: false },
-    });
-  } catch (error) {
-    alert(`error on pushwindow`);
-  }
-}
-
-/**
- * Gobanga => Risk team
- * Fares => CyberSecurity
- */
