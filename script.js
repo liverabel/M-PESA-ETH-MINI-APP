@@ -119,25 +119,33 @@ function singleSignOn() {
       "USER_MOBILE",
     ],
     success: (res) => {
-      console.log("RES", res);
-      this.setData({
-        permissions: res,
-      });
-      AlipayJSBridge.call('hideLoading');
-      AlipayJSBridge.call('alert', {
-        title: "Login Successful",
-        content: "You have successfully logged in.",
-        buttonText: "okay",
-      });
+      console.log("Login successful:", res);
+      try {
+        this.setData({
+          permissions: res,
+        });
+        AlipayJSBridge.call('hideLoading');
+        AlipayJSBridge.call('alert', {
+          title: "Login Successful",
+          content: "You have successfully logged in.",
+          buttonText: "okay",
+        });
+      } catch (error) {
+        console.error("Error handling success callback:", error);
+      }
     },
     fail: (error) => {
-      AlipayJSBridge.call('hideLoading');
-      console.log("ERROR", error);
-      AlipayJSBridge.call('alert', {
-        title: "Error",
-        content: JSON.stringify(error, null, 2),
-        buttonText: "okay",
-      });
+      console.error("Login failed:", error);
+      try {
+        AlipayJSBridge.call('hideLoading');
+        AlipayJSBridge.call('alert', {
+          title: "Error",
+          content: "Login failed. Please try again.",
+          buttonText: "okay",
+        });
+      } catch (error) {
+        console.error("Error handling fail callback:", error);
+      }
     }
   });
 }
