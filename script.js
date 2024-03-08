@@ -125,8 +125,8 @@ function singleSignOn() {
       });
       my.hideLoading();
       my.alert({
-        title: "user scopes",
-        content: JSON.stringify(res, null, 2),
+        title: "Login Successful",
+        content: "You have successfully logged in.",
         buttonText: "okay",
       });
     },
