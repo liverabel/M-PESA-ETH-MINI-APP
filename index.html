@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- <script src="https://cdn.marmot-cloud.com/npm/hylid-bridge/1.6040.5/index.js"></script> -->
+    <script type="text/javascript" src="https://appx/web-view.min.js"></script>
+    <title>WebCam Access</title>
+  </head>
+
+  <body onload="init();">
+    <!-- <h2>WebCam View</h2>
+    <div id="container">
+      <video autoplay="true" id="videoElement"></video>
+    </div>
+    <div id="buttonDiv">
+      <button onclick="snapshot()">Take Screenshot</button>
+      <button id="stop">Stop Webcam</button>
+    </div>
+
+    <p><strong>Screenshots: </strong></p>
+    <canvas id="myCanvas" width="400" height="350"></canvas>
+
+    <div id="audio-div">
+      <h2>Test Audio:</h2>
+      <audio controls>
+        <source src="test.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div id="video-div">
+      <h2>Test Video Stream:</h2>
+      <iframe
+        width="420"
+        height="315"
+        src="https://www.youtube.com/embed/vLtS3XlqTxw"
+      >
+      </iframe>
+    </div> -->
+    <h2>ANT APIs</h2>
+    <div id="mini-appfeatures">
+      <!-- <button onclick="openWebPage()">Youtube</button> -->
+      <button onclick="getDocument()">Open Document</button>
+      <br />
+      <button onclick="makePayBillPayment()">Make PayBill Payment</button>
+      <br />
+      <button onclick="makeTillPayment()">Make Till Payment</button>
+      <br />
+      <button onclick="openDomainUsingWindow()">
+        Open another domain using Window
+      </button>
+      <br />
+      <button onclick="openDomainUsingAlipayJSBridge()">
+        Open another domain using AlipayJSBridge
+      </button>
+      <br />
+      <button onclick="myOpenURL()">Open another domain using My</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // function getDocument() {
+      //   console.log('trying to get mini app document');
+      //   try {
+      //     AlipayJSBridge.call(
+      //       'downloadFile',
+      //       {
+      //         url: 'https://av.sc.com/ke/content/docs/ke-online-mutual-funds-faq.pdf',
+      //       },
+      //       ({ apFilePath }) => {
+      //         AlipayJSBridge.call(
+      //           'openDocument',
+      //           {
+      //             filePath: apFilePath,
+      //             fileType: 'pdf',
+      //           },
+      //           ({ res }) => {
+      //             console.log('res', res);
+      //           }
+      //         );
+      //       }
+      //     );
+      //   } catch (error) {
+      //     console.log('error', error);
+      //     alert(error);
+      //   }
+      // }
+    </script>
+  </body>
+</html>
