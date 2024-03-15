@@ -42,14 +42,14 @@ function snapshot() {
 function getDocument() {
   console.log('trying to get mini app document');
   try {
-    AlipayJSBridge.call(
+    my.call(
       'downloadFile',
       {
         url: 'https://wealth-test.sc.com/wm/data/gbl/omf/ms/doc/Document/26f582bcc78c00056e04e1076a681a58.msdoc/?key=277c7034c4553750ca72946ac58565acdcb4077c205711b55d7737590705b5c6',
         // url: 'https://av.sc.com/ke/content/docs/ke-online-mutual-funds-faq.pdf',
       },
       ({ apFilePath }) => {
-        AlipayJSBridge.call(
+        my.call(
           'openDocument',
           {
             filePath: apFilePath,
@@ -67,11 +67,11 @@ function getDocument() {
   }
 }
 
-// AlipayJSBridge.call('jsAPI', {}, ()=> {}, () =>{})
+// my.call('jsAPI', {}, ()=> {}, () =>{})
 
 function makePayWithMPESA() {
   try {
-    AlipayJSBridge.call(
+    my.call(
       'payWithMpesa',
       {
         businessID: '6060',
@@ -83,7 +83,7 @@ function makePayWithMPESA() {
       (res) => {
         console.log('success', res);
         alert(`payWithMpesa, ${JSON.stringify(res)}`);
-        // AlipayJSBridge.call
+        // my.call
         //   'alert',{ title: 'Success', content: JSON.stringify(res) },
         //   () => {},
         //   () => {}
@@ -93,7 +93,7 @@ function makePayWithMPESA() {
       (res) => {
         alert(res);
         console.log(('errror', res));
-        AlipayJSBridge.call(
+        my.call(
           'alert',
           { title: 'Fail', content: JSON.stringify(res) },
           () => {},
@@ -108,7 +108,7 @@ function makePayWithMPESA() {
 }
 
 function singleSignOn() {
-  AlipayJSBridge.call("userScopes", {
+  my.call("userScopes", {
     scopes: [
       "USER_NAME",
       "USER_LNAME",
@@ -124,8 +124,8 @@ function singleSignOn() {
         this.setData({
           permissions: res,
         });
-        AlipayJSBridge.call('hideLoading');
-        AlipayJSBridge.call('alert', {
+        my.call('hideLoading');
+        my.call('alert', {
           title: "Login Successful",
           content: "You have successfully logged in.",
           buttonText: "okay",
@@ -137,8 +137,8 @@ function singleSignOn() {
     fail: (error) => {
       console.error("Login failed:", error);
       try {
-        AlipayJSBridge.call('hideLoading');
-        AlipayJSBridge.call('alert', {
+        my.call('hideLoading');
+        my.call('alert', {
           title: "Error",
           content: "Login failed. Please try again.",
           buttonText: "okay",
